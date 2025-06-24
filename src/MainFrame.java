@@ -2,7 +2,10 @@ package src;
 
 // MainFrame.java
 import javax.swing.*;
+import javax.swing.text.Document;
+
 import java.awt.*;
+import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -555,6 +558,10 @@ public class MainFrame extends JFrame {
                 message.append("Date de commande : ").append(order.date).append("\n");
                 message.append("\nProduits :\n");
 
+                double totalHT = 0.0;
+                double TVA = 20;
+                double totalTTC = 0.0;
+
                 Map<String, Long> productCount = order.productIds.stream()
                         .collect(Collectors.groupingBy(id -> id, Collectors.counting()));
 
@@ -562,10 +569,20 @@ public class MainFrame extends JFrame {
                     Product p = products.stream().filter(prod -> prod.id.equals(entry.getKey())).findFirst()
                             .orElse(null);
                     if (p != null) {
-                        message.append("- ").append(p.name).append("(x").append(entry.getValue()).append(")")
-                                .append("\n");
+                        double subtotal = p.price * entry.getValue();
+                        totalHT += subtotal;
+
+                        message.append("- ").append(p.name)
+                                .append(" (x").append(entry.getValue()).append(")")
+                                .append(" - ").append(String.format("%.2f €", p.price)).append(" /unité")
+                                .append(" => ").append(String.format("%.2f €", subtotal)).append("\n");
                     }
                 }
+
+                message.append("\nPrix total (HT) : " + String.format("%.2f", totalHT) + "€").append("\n");
+                totalTTC = (totalHT * 1.2);
+                message.append("TVA : " + TVA + "%").append("\n");
+                message.append("Prix total (TTC) : " + String.format("%.2f", totalTTC) + "€").append("\n");
 
                 JOptionPane.showMessageDialog(this, message.toString(), "Détails de la commande",
                         JOptionPane.INFORMATION_MESSAGE);
