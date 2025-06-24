@@ -2,10 +2,8 @@ package src;
 
 // MainFrame.java
 import javax.swing.*;
-import javax.swing.text.Document;
 
 import java.awt.*;
-import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

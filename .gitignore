@@ -1,1 +1,5 @@
-data/*
+data/bills.json
+data/clients.json
+data/deliveries.json
+data/orders.json
+data/products.json
