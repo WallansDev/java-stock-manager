@@ -1,7 +1,9 @@
-package src;
+package src.controllers;
 
-// DataManager.java
 import com.google.gson.reflect.TypeToken;
+
+import src.models.*;
+
 import com.google.gson.Gson;
 
 import java.io.*;

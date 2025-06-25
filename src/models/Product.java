@@ -1,4 +1,4 @@
-package src;
+package src.models;
 
 public class Product {
     public String id;

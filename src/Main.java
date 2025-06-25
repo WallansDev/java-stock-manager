@@ -2,10 +2,12 @@ package src;
 
 import javax.swing.*;
 
+import src.views.MainView;
+
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new MainFrame().setVisible(true);
+            new MainView().setVisible(true);
         });
     }
 }
