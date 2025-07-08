@@ -123,7 +123,7 @@ public class ProductView extends JPanel {
 
             JFrame windowParent = (JFrame) SwingUtilities.getWindowAncestor(this);
 
-            final JDialog frame = new JDialog(windowParent, "Modifier un produit", true);
+            final JDialog frame = new JDialog(windowParent, "Modification du produit : "+ product.getName(), true);
             frame.setSize(500, 300);
             frame.setLocationRelativeTo(null);
 

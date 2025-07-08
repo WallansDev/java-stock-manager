@@ -94,7 +94,7 @@ public class ClientView extends JPanel {
                 String phone = phoneField.getText().trim();
 
                 try {
-                    // Appel méthode controller d'ajout d'un produit.
+                    // Appel méthode controller d'ajout d'un client.
                     controller.addClient(UUID.randomUUID().toString(), name, email, address, phone);
 
                     JOptionPane.showMessageDialog(frame, "Client ajouté !");
@@ -159,10 +159,10 @@ public class ClientView extends JPanel {
                 String phone = phoneField.getText().trim();
 
                 try {
-                    // Appel méthode controller d'ajout d'un produit.
-                    controller.addClient(UUID.randomUUID().toString(), name, email, address, phone);
+                    // Appel méthode controller de modification d'un client.
+                    controller.updateClient(index, name, email, address, phone);
 
-                    JOptionPane.showMessageDialog(frame, "Client ajouté !");
+                    JOptionPane.showMessageDialog(frame, "Client modifié !");
                     frame.dispose();
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frame,
@@ -188,5 +188,20 @@ public class ClientView extends JPanel {
             frame.setVisible(true);
         });
     
+        deleteBtn.addActionListener(e -> {
+            int index = clientList.getSelectedIndex();
+
+                        JFrame windowParent = (JFrame) SwingUtilities.getWindowAncestor(this);
+
+            final JDialog frame = new JDialog(windowParent, true);
+            // frame.setSize(500, 300);
+            // frame.setLocationRelativeTo(null);
+            
+            controller.deleteProduct(index);
+
+        JOptionPane.showMessageDialog(frame, "Client supprimé !");
+
+        });
+
     }
 }

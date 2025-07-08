@@ -77,6 +77,13 @@ public class ClientController {
         return index >= 0 && index < clients.size() ? clients.get(index) : null;
     }
 
+public void updateClientList(int index, Client client) {
+        if (index >= 0 && index < clients.size()) {
+            clients.set(index, client);
+            this.saveAllClients();
+        }
+    }
+
 
     public void addClient(String id, String name, String email, String address, String phone) {
         Client newClient = new Client(id, name, email, address, phone);
@@ -88,38 +95,37 @@ public class ClientController {
         this.callSubscribes();
     }
 
-    // public void updateProduct(int index, String name, int quantity, double price) {
-    //     if (index >= 0 && index < products.size()) {
-    //         // Product product = products.get(index);
+    public void updateClient(int index, String name, String email, String address, String phone) {
+        if (index >= 0 && index < clients.size()) {
 
-    //         System.out.println("Modification du produit");
+            System.out.println("Modification du client");
             
-    //         Product existingProduct = this.getProduct(index);
-    //     if (existingProduct != null) {
-    //         Product updatedProduct = new Product(existingProduct.id, name, quantity, price);
-    //         this.updateProductList(index, updatedProduct);
-    //         this.callSubscribes();
-    //     }
-    //     } else {
-    //         JOptionPane.showMessageDialog(view,
-    //                 "Choisir un produit à modifier.", "Erreur",
-    //                 JOptionPane.ERROR_MESSAGE);
-    //     }
-    // }
+            Client existingClient = this.getClient(index);
+        if (existingClient != null) {
+            Client updatedClient = new Client(existingClient.id, name, email, address, phone);
+            this.updateClientList(index, updatedClient);
+            this.callSubscribes();
+        }
+        } else {
+            JOptionPane.showMessageDialog(view,
+                    "Choisir un client à modifier.", "Erreur",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
-    // public void deleteProduct(int index) {
-    //     if (index >= 0 && index < products.size()) {
-    //         products.remove(index);
-    //         saveAllProducts();
-    //         this.callSubscribes();
+    public void deleteProduct(int index) {
+        if (index >= 0 && index < clients.size()) {
+            clients.remove(index);
+            saveAllClients();
+            this.callSubscribes();
 
-    //         System.out.println("Suppression du produit.");
+            System.out.println("Suppression du client.");
 
-    //     } else {
-    //         JOptionPane.showMessageDialog(view,
-    //                 "Choisir un produit à supprimer.", "Erreur",
-    //                 JOptionPane.ERROR_MESSAGE);
-    //     }
-    // }
+        } else {
+            JOptionPane.showMessageDialog(view,
+                    "Choisir un client à supprimer.", "Erreur",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
 }
