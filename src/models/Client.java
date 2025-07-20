@@ -8,11 +8,11 @@ public class Client {
     public String phone;
 
     public Client(String id, String name, String email, String address, String phone) {
-     this.id = id;
-     this.name = name;
-     this.email = email;
-     this.address = address;
-     this.phone = phone;
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
     }
 
     public String getId() {
@@ -54,12 +54,11 @@ public class Client {
     public void setPhone(String phone) {
         this.phone = phone;
     }
- 
 
     @Override
     public String toString() {
-        return "Nom : " + getName() + " - Email : " + getEmail() + " - Téléphone : " + getPhone() + " - Adresse : " + getAddress();
+        return "Nom : " + getName() + " - Email : " + getEmail() + " - Téléphone : " + getPhone() + " - Adresse : "
+                + getAddress();
     }
 
-    
 }

@@ -4,5 +4,11 @@
     "name": "Papier A",
     "quantity": 5,
     "price": 4.989999771118164
+  },
+  {
+    "id": "8fd94e6e-bc33-4c6b-9654-31a43d7d1708",
+    "name": "Test",
+    "quantity": 4,
+    "price": 15.0
   }
 ]

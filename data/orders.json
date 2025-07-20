@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "id": "eb8cba9c-7dbb-4806-bcaa-ccf79c49ee2e",
+        "orderNumber" : 1,
+        "clientId" : 1,
+        "productIds": [1],
+        "date": "04/03/2025",
+        "status": "A expédier"
+    }
+]
