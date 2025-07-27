@@ -77,6 +77,16 @@ public class ProductController {
         return index >= 0 && index < products.size() ? products.get(index) : null;
     }
 
+    public Product getProductById(String id) {
+        List<Product> products = loadProducts();
+        for (Product product : products) {
+            if (product.getId().equals(id)) {
+                return product;
+            }
+        }
+        return null;
+    }
+
     public void updateProductList(int index, Product product) {
         if (index >= 0 && index < products.size()) {
             products.set(index, product);
@@ -96,16 +106,15 @@ public class ProductController {
 
     public void updateProduct(int index, String name, int quantity, double price) {
         if (index >= 0 && index < products.size()) {
-            // Product product = products.get(index);
 
             System.out.println("Modification du produit");
-            
+
             Product existingProduct = this.getProduct(index);
-        if (existingProduct != null) {
-            Product updatedProduct = new Product(existingProduct.id, name, quantity, price);
-            this.updateProductList(index, updatedProduct);
-            this.callSubscribes();
-        }
+            if (existingProduct != null) {
+                Product updatedProduct = new Product(existingProduct.id, name, quantity, price);
+                this.updateProductList(index, updatedProduct);
+                this.callSubscribes();
+            }
         } else {
             JOptionPane.showMessageDialog(view,
                     "Choisir un produit à modifier.", "Erreur",

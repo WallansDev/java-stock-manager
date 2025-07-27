@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
-import java.util.Date;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -30,16 +30,17 @@ public class OrderController {
 
     private Consumer<List<Order>> onOrderChange = null;
 
-    private void saveAllOrders() {
+    public void saveAllOrders() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter(filename)) {
             gson.toJson(orders, writer);
+            this.callSubscribes();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void subscribeToClienChange(Consumer<List<Order>> con) {
+    public void subscribeToOrderChange(Consumer<List<Order>> con) {
         this.onOrderChange = con;
     }
 
@@ -75,11 +76,55 @@ public class OrderController {
         return index >= 0 && index < orders.size() ? orders.get(index) : null;
     }
 
-    public void addOrder(String clientId, List<String> productsId) {
-        Order order = new Order(UUID.randomUUID().toString(), "1", clientId, productsId, new Date().toString(),
+    public void addOrder(Client client, List<Product> products, List<Integer> quantities) {
+        if (client == null || products == null || quantities == null) {
+            System.out.println("Erreur : client ou products ou quantités null");
+            return;
+        }
+        if (products.size() != quantities.size()) {
+            System.out.println("Erreur : taille des listes products/quantités incohérente");
+            return;
+        }
+
+        List<String> productIds = new ArrayList<>();
+        for (Product p : products) {
+            productIds.add(p.getId());
+        }
+
+        LocalDate futurDate = LocalDate.now().plusDays(60);
+        String deliveryDate = futurDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        int nextOrderNumber = 1;
+        List<Order> orders = loadOrders();
+        nextOrderNumber = orders.stream()
+                .mapToInt(Order::getOrderNumber)
+                .max()
+                .orElse(0) + 1;
+
+        Order newOrder = new Order(UUID.randomUUID().toString(), nextOrderNumber, client.getId(), productIds,
+                quantities,
+                LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), deliveryDate,
                 "A expédier");
-        orders.add(order);
-        saveAllOrders();
-        callSubscribes();
+
+        orders.add(newOrder);
+
+        this.saveAllOrders();
+    }
+
+    public void updateOrderStatus(Integer orderNumber, String newStatus, BillController billController,
+            ClientController clientController) {
+        Order order = orders.stream()
+                .filter(o -> o.getOrderNumber() == orderNumber)
+                .findFirst()
+                .orElse(null);
+
+        if (order != null) {
+            order.setStatus(newStatus);
+            saveAllOrders();
+            if ("Livrée".equalsIgnoreCase(newStatus)) {
+                Client client = clientController.getClientById(order.getClientId());
+                billController.createBill(order, client);
+            }
+        }
     }
 }

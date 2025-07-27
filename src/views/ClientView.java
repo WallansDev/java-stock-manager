@@ -60,7 +60,6 @@ public class ClientView extends JPanel {
 
         add(new JScrollPane(clientList), BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
-    
 
         addBtn.addActionListener(e -> {
             JFrame windowParent = (JFrame) SwingUtilities.getWindowAncestor(this);
@@ -82,7 +81,7 @@ public class ClientView extends JPanel {
             JLabel addressLabel = new JLabel("Adresse de livraison / facturation :");
             JTextField addressField = new JTextField(20);
 
-             JLabel phoneLabel = new JLabel("Numéro de téléphone :");
+            JLabel phoneLabel = new JLabel("Numéro de téléphone :");
             JTextField phoneField = new JTextField(20);
 
             JButton submitBtn = new JButton("Ajouter");
@@ -130,7 +129,7 @@ public class ClientView extends JPanel {
 
             JFrame windowParent = (JFrame) SwingUtilities.getWindowAncestor(this);
 
-            final JDialog frame = new JDialog(windowParent, "Modification client : " + client.name , true);
+            final JDialog frame = new JDialog(windowParent, "Modification client : " + client.name, true);
             frame.setSize(500, 300);
             frame.setLocationRelativeTo(null);
 
@@ -147,7 +146,7 @@ public class ClientView extends JPanel {
             JLabel addressLabel = new JLabel("Adresse de livraison / facturation :");
             JTextField addressField = new JTextField(client.getAddress());
 
-             JLabel phoneLabel = new JLabel("Numéro de téléphone :");
+            JLabel phoneLabel = new JLabel("Numéro de téléphone :");
             JTextField phoneField = new JTextField(client.getPhone());
 
             JButton submitBtn = new JButton("Ajouter");
@@ -187,19 +186,17 @@ public class ClientView extends JPanel {
             frame.getContentPane().add(panel);
             frame.setVisible(true);
         });
-    
+
         deleteBtn.addActionListener(e -> {
             int index = clientList.getSelectedIndex();
 
-                        JFrame windowParent = (JFrame) SwingUtilities.getWindowAncestor(this);
+            JFrame windowParent = (JFrame) SwingUtilities.getWindowAncestor(this);
 
             final JDialog frame = new JDialog(windowParent, true);
-            // frame.setSize(500, 300);
-            // frame.setLocationRelativeTo(null);
-            
+
             controller.deleteProduct(index);
 
-        JOptionPane.showMessageDialog(frame, "Client supprimé !");
+            JOptionPane.showMessageDialog(frame, "Client supprimé !");
 
         });
 

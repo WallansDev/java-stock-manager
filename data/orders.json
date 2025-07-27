@@ -1,10 +1,60 @@
 [
-    {
-        "id": "eb8cba9c-7dbb-4806-bcaa-ccf79c49ee2e",
-        "orderNumber" : 1,
-        "clientId" : 1,
-        "productIds": [1],
-        "date": "04/03/2025",
-        "status": "A expÃ©dier"
-    }
+  {
+    "id": "64b40643-6b9b-4c95-9673-0f560ba24cc9",
+    "orderNumber": 1,
+    "clientId": "5a0e48e0-73e0-4940-95a2-2136773bd90c",
+    "productIds": [
+      "2c99f62a-4982-4636-a299-71c5524db997",
+      "8fd94e6e-bc33-4c6b-9654-31a43d7d1708"
+    ],
+    "quantities": [
+      4,
+      1
+    ],
+    "purchaseDate": "20/07/2025",
+    "deliveryDate": "18/09/2025",
+    "status": "Livrée"
+  },
+  {
+    "id": "80d4c0e6-ba2a-4cb1-a51e-5f282c832b65",
+    "orderNumber": 2,
+    "clientId": "eb8cba9c-7dbb-4806-bcaa-ccf79c49ee2e",
+    "productIds": [
+      "2c99f62a-4982-4636-a299-71c5524db997"
+    ],
+    "quantities": [
+      1
+    ],
+    "purchaseDate": "20/07/2025",
+    "deliveryDate": "18/09/2025",
+    "status": "Livrée"
+  },
+  {
+    "id": "55910434-2f88-4223-9ce3-cc50514acd5f",
+    "orderNumber": 3,
+    "clientId": "eb8cba9c-7dbb-4806-bcaa-ccf79c49ee2e",
+    "productIds": [
+      "2c99f62a-4982-4636-a299-71c5524db997"
+    ],
+    "quantities": [
+      1
+    ],
+    "purchaseDate": "20/07/2025",
+    "deliveryDate": "18/09/2025",
+    "status": "A expï¿½dier"
+  },
+  {
+    "id": "770a8335-c956-48f4-aaf4-bd570bba7167",
+    "orderNumber": 4,
+    "clientId": "eb8cba9c-7dbb-4806-bcaa-ccf79c49ee2e",
+    "productIds": [
+      "2c99f62a-4982-4636-a299-71c5524db997"
+    ],
+    "quantities": [
+      1
+    ],
+    "purchaseDate": "22/07/2025",
+    "deliveryDate": "20/09/2025",
+    "status": "A expédier"
+  }
 ]

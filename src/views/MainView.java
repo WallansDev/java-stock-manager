@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
 import src.controllers.*;
-import src.controllers.*;
+import src.models.Bill;
 
 public class MainView extends JFrame {
 
@@ -12,12 +12,15 @@ public class MainView extends JFrame {
     private ProductController productController;
     private ClientController clientController;
     private OrderController orderController;
-    
-    
+    private DeliveryNoteController deliveryNoteController;
+    private BillController billController;
+
     // Views
     private ProductView productView;
     private ClientView clientView;
     private OrderView orderView;
+    private DeliveryNoteView deliveryNoteView;
+    private BillView billView;
 
     public MainView() {
         initializeControllers();
@@ -29,12 +32,16 @@ public class MainView extends JFrame {
         productController = new ProductController();
         clientController = new ClientController();
         orderController = new OrderController();
+        deliveryNoteController = new DeliveryNoteController();
+        billController = new BillController();
     }
 
     private void initializeViews() {
         productView = new ProductView(productController);
         clientView = new ClientView(clientController);
-        orderView = new OrderView(orderController);
+        orderView = new OrderView(orderController, billController, clientController);
+        deliveryNoteView = new DeliveryNoteView(deliveryNoteController);
+        billView = new BillView(billController);
     }
 
     private void setupUI() {
@@ -47,8 +54,8 @@ public class MainView extends JFrame {
         tabs.addTab("Produits", productView);
         tabs.addTab("Clients", clientView);
         tabs.addTab("Commandes", orderView);
-        tabs.addTab("Bons de livraison", null);
-        tabs.addTab("Factures", null);
+        tabs.addTab("Bons de livraison", deliveryNoteView);
+        tabs.addTab("Factures", billView);
 
         add(tabs);
     }

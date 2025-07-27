@@ -10,18 +10,23 @@ public class Order {
     private OrderController controller;
 
     public String id;
-    public String orderNumber;
+    public Integer orderNumber;
     public String clientId;
     public List<String> productIds;
-    public String date;
+    public List<Integer> quantities;
+    public String purchaseDate;
+    public String deliveryDate;
     public String status;
 
-    public Order(String id, String orderNumber, String clientId, List<String> productIds, String date, String status) {
+    public Order(String id, Integer orderNumber, String clientId, List<String> productIds, List<Integer> quantities,
+            String purchaseDate, String deliveryDate, String status) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.clientId = clientId;
         this.productIds = productIds;
-        this.date = date;
+        this.quantities = quantities;
+        this.purchaseDate = purchaseDate;
+        this.deliveryDate = deliveryDate;
         this.status = status;
     }
 
@@ -33,16 +38,16 @@ public class Order {
         this.id = id;
     }
 
-    public String getOrderNumber() {
-        return this.orderNumber;
+    public String getClientId() {
+        return this.clientId;
     }
 
-    public void setOrderNumber(String orderNumber) {
+    public void setOrderNumber(Integer orderNumber) {
         this.orderNumber = orderNumber;
     }
 
-    public String getClientId() {
-        return this.clientId;
+    public Integer getOrderNumber() {
+        return this.orderNumber;
     }
 
     public void setClientId(String clientId) {
@@ -57,12 +62,28 @@ public class Order {
         this.productIds = productIds;
     }
 
-    public String getDate() {
-        return this.date;
+    public List<Integer> getQuantities() {
+        return this.quantities;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setQuantities(List<Integer> quantities) {
+        this.quantities = quantities;
+    }
+
+    public String getPurchaseDate() {
+        return this.purchaseDate;
+    }
+
+    public void setPurchaseDate(String purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
+
+    public String getDeliveryDate() {
+        return this.deliveryDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 
     public String getStatus() {
@@ -75,11 +96,8 @@ public class Order {
 
     @Override
     public String toString() {
-        return '#' + getOrderNumber() + " - De : " + getClientId() + " - " + getProductIds() + " - Commandé le : "
-                + getDate() + " - Statut : " + getStatus();
-        // return '#' + getOrderNumber() + " - De : " +
-        // ClientController.class.getClient() + " - " + getProductIds() + " - Commandé
-        // le : " + getDate() + " - Statut : " + getStatus();
+        return " - De : " + getClientId() + " - " + getProductIds() + " - Commandé le : "
+                + getPurchaseDate() + " - Statut : " + getStatus();
     }
 
 }

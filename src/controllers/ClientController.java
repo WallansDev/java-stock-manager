@@ -77,13 +77,22 @@ public class ClientController {
         return index >= 0 && index < clients.size() ? clients.get(index) : null;
     }
 
-public void updateClientList(int index, Client client) {
+    public Client getClientById(String id) {
+        List<Client> clients = loadClients();
+        for (Client client : clients) {
+            if (client.getId().equals(id)) {
+                return client;
+            }
+        }
+        return null;
+    }
+
+    public void updateClientList(int index, Client client) {
         if (index >= 0 && index < clients.size()) {
             clients.set(index, client);
             this.saveAllClients();
         }
     }
-
 
     public void addClient(String id, String name, String email, String address, String phone) {
         Client newClient = new Client(id, name, email, address, phone);
@@ -99,13 +108,13 @@ public void updateClientList(int index, Client client) {
         if (index >= 0 && index < clients.size()) {
 
             System.out.println("Modification du client");
-            
+
             Client existingClient = this.getClient(index);
-        if (existingClient != null) {
-            Client updatedClient = new Client(existingClient.id, name, email, address, phone);
-            this.updateClientList(index, updatedClient);
-            this.callSubscribes();
-        }
+            if (existingClient != null) {
+                Client updatedClient = new Client(existingClient.id, name, email, address, phone);
+                this.updateClientList(index, updatedClient);
+                this.callSubscribes();
+            }
         } else {
             JOptionPane.showMessageDialog(view,
                     "Choisir un client à modifier.", "Erreur",
