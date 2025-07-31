@@ -1,8 +1,10 @@
 {
     "java.project.sourcePaths": [
-        "."
+        "src"
     ],
     "java.project.referencedLibraries": [
-        "librairies\\gson-2.13.1.jar"
+        "librairies/gson-2.13.1.jar",
+        "librairies/junit-4.13.2.jar",
+        "librairies/hamcrest-core-1.3.jar"
     ]
 }

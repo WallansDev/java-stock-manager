@@ -1,16 +1,35 @@
-package src.views;
+package views;
 
 import javax.swing.*;
 import java.awt.*;
-import src.controllers.*;
-import src.models.*;
+import controllers.*;
+import models.*;
 import java.util.List;
 
+/**
+ * Vue Swing permettant d'afficher et de gérer la liste des factures (Bill).
+ * Permet de marquer une facture comme payée et d'afficher les détails d'une
+ * facture.
+ */
 public class BillView extends JPanel {
+    /**
+     * Liste graphique des factures.
+     */
     private JList<Bill> billList;
+    /**
+     * Modèle de données pour la liste des factures.
+     */
     private DefaultListModel<Bill> billListModel;
+    /**
+     * Contrôleur de factures associé à la vue.
+     */
     private BillController billController;
 
+    /**
+     * Construit la vue des factures et initialise l'interface graphique.
+     *
+     * @param billController Contrôleur de factures à utiliser
+     */
     public BillView(BillController billController) {
         this.billController = billController;
         initializeUI();
@@ -25,6 +44,9 @@ public class BillView extends JPanel {
         billController.loadBills();
     }
 
+    /**
+     * Initialise l'interface graphique de la vue des factures.
+     */
     private void initializeUI() {
         setLayout(new BorderLayout());
 
@@ -103,6 +125,9 @@ public class BillView extends JPanel {
         });
     }
 
+    /**
+     * Rafraîchit la liste graphique des factures à partir du contrôleur.
+     */
     private void refreshBillList() {
         billListModel.clear();
         for (Bill b : billController.loadBills()) {

@@ -1,10 +1,10 @@
-package src.views;
+package views;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-import src.controllers.*;
-import src.models.Bill;
+import controllers.*;
+import models.Bill;
 
 public class MainView extends JFrame {
 

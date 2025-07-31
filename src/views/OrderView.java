@@ -1,4 +1,4 @@
-package src.views;
+package views;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -7,21 +7,48 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.*;
 import java.awt.BorderLayout;
-// import java.util.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.*;
-import src.controllers.*;
-import src.models.*;
+import controllers.*;
+import models.*;
 
+/**
+ * Vue Swing permettant d'afficher et de gérer la liste des commandes.
+ * Permet d'ajouter, afficher et modifier le statut des commandes via une
+ * interface graphique.
+ */
 public class OrderView extends JPanel {
+    /**
+     * Modèle de données pour la liste des commandes (affichage sous forme de
+     * chaînes).
+     */
     private DefaultListModel<String> listModel;
+    /**
+     * Liste graphique des commandes (affichage sous forme de chaînes).
+     */
     private JList<String> orderList;
 
+    /**
+     * Contrôleur de commandes associé à la vue.
+     */
     private OrderController controller;
+    /**
+     * Contrôleur de factures associé à la vue.
+     */
     private BillController billController;
+    /**
+     * Contrôleur de clients associé à la vue.
+     */
     private ClientController clientController;
 
+    /**
+     * Construit la vue des commandes et initialise l'interface graphique.
+     *
+     * @param controller       Contrôleur de commandes à utiliser
+     * @param billController   Contrôleur de factures à utiliser
+     * @param clientController Contrôleur de clients à utiliser
+     */
     public OrderView(OrderController controller, BillController billController, ClientController clientController) {
         this.controller = controller;
         this.billController = billController;
@@ -55,6 +82,9 @@ public class OrderView extends JPanel {
         controller.loadOrders();
     }
 
+    /**
+     * Initialise l'interface graphique de la vue des commandes.
+     */
     private void initializeUI() {
         setLayout(new BorderLayout());
 

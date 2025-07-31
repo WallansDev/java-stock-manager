@@ -1,31 +1,38 @@
-package src.views;
+package views;
 
-import src.controllers.ProductController;
-import src.models.Product;
+import controllers.ProductController;
+import models.Product;
 import java.util.UUID;
 
-import javax.management.StringValueExp;
 import javax.swing.*;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Window;
-import java.awt.event.ActionListener;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.NumberFormat;
-import java.util.List;
 import java.util.Locale;
-import java.util.ArrayList;
-import java.util.UUID;
 
+/**
+ * Vue Swing permettant d'afficher et de gérer la liste des produits.
+ * Permet d'ajouter, modifier et supprimer des produits via une interface
+ * graphique.
+ */
 public class ProductView extends JPanel {
+    /**
+     * Liste graphique des produits.
+     */
     private JList<Product> productList;
+    /**
+     * Modèle de données pour la liste des produits.
+     */
     private DefaultListModel<Product> listModel;
 
+    /**
+     * Contrôleur de produits associé à la vue.
+     */
     private ProductController controller;
 
+    /**
+     * Construit la vue des produits et initialise l'interface graphique.
+     *
+     * @param controller Contrôleur de produits à utiliser
+     */
     public ProductView(ProductController controller) {
         this.controller = controller;
         initializeUI();
@@ -40,6 +47,9 @@ public class ProductView extends JPanel {
         controller.loadProducts();
     }
 
+    /**
+     * Initialise l'interface graphique de la vue des produits.
+     */
     private void initializeUI() {
         setLayout(new BorderLayout());
 
@@ -123,7 +133,7 @@ public class ProductView extends JPanel {
 
             JFrame windowParent = (JFrame) SwingUtilities.getWindowAncestor(this);
 
-            final JDialog frame = new JDialog(windowParent, "Modification du produit : "+ product.getName(), true);
+            final JDialog frame = new JDialog(windowParent, "Modification du produit : " + product.getName(), true);
             frame.setSize(500, 300);
             frame.setLocationRelativeTo(null);
 
@@ -147,7 +157,7 @@ public class ProductView extends JPanel {
                 String priceText = priceField.getText().trim();
                 String stockText = stockField.getText().trim();
 
-                System.out.println( name + " - " + stockText + " - "
+                System.out.println(name + " - " + stockText + " - "
                         + priceText);
                 try {
                     float price = Float.parseFloat(priceText);

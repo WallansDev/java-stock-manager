@@ -1,34 +1,36 @@
-package src.views;
+package views;
 
-import src.controllers.ClientController;
-import src.controllers.ProductController;
-import src.models.Client;
-import src.models.Product;
+import controllers.ClientController;
+import models.Client;
 import java.util.UUID;
-
-import javax.management.StringValueExp;
 import javax.swing.*;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Window;
-import java.awt.event.ActionListener;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.NumberFormat;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-import java.util.ArrayList;
-import java.util.UUID;
 
+/**
+ * Vue Swing permettant d'afficher et de gérer la liste des clients.
+ * Permet d'ajouter, modifier et supprimer des clients via une interface
+ * graphique.
+ */
 public class ClientView extends JPanel {
+    /**
+     * Liste graphique des clients.
+     */
     private JList<Client> clientList;
+    /**
+     * Modèle de données pour la liste des clients.
+     */
     private DefaultListModel<Client> listModel;
 
+    /**
+     * Contrôleur de clients associé à la vue.
+     */
     private ClientController controller;
 
+    /**
+     * Construit la vue des clients et initialise l'interface graphique.
+     *
+     * @param controller Contrôleur de clients à utiliser
+     */
     public ClientView(ClientController controller) {
         this.controller = controller;
         initializeUI();
@@ -43,6 +45,9 @@ public class ClientView extends JPanel {
         controller.loadClients();
     }
 
+    /**
+     * Initialise l'interface graphique de la vue des clients.
+     */
     private void initializeUI() {
         setLayout(new BorderLayout());
 

@@ -1,4 +1,4 @@
-package src.views;
+package views;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -8,27 +8,56 @@ import javax.swing.JScrollPane;
 import javax.swing.*;
 import java.awt.BorderLayout;
 import java.util.List;
-import java.util.ArrayList;
 import java.awt.*;
-import src.controllers.*;
-import src.models.*;
-import java.text.DecimalFormat;
+import controllers.*;
+import models.*;
 
+/**
+ * Vue Swing permettant d'afficher et de gérer la liste des bons de livraison.
+ * Permet d'afficher les détails d'un bon de livraison pour une commande
+ * sélectionnée.
+ */
 public class DeliveryNoteView extends JPanel {
+    /**
+     * Liste graphique des bons de livraison (affiche les commandes).
+     */
     private JList<DeliveryNote> deliveryNotesList;
+    /**
+     * Modèle de données pour la liste des bons de livraison.
+     */
     private DefaultListModel<DeliveryNote> listModel;
+    /**
+     * Contrôleur de bons de livraison associé à la vue.
+     */
     private DeliveryNoteController controller;
 
+    /**
+     * Liste graphique des commandes.
+     */
     private JList<Order> orderList;
+    /**
+     * Modèle de données pour la liste des commandes.
+     */
     private DefaultListModel<Order> orderListModel;
+    /**
+     * Contrôleur de commandes utilisé pour charger les commandes.
+     */
     private OrderController orderController;
 
+    /**
+     * Construit la vue des bons de livraison et initialise l'interface graphique.
+     *
+     * @param controller Contrôleur de bons de livraison à utiliser
+     */
     public DeliveryNoteView(DeliveryNoteController controller) {
         this.controller = controller;
         this.orderController = new OrderController();
         initializeUI();
     }
 
+    /**
+     * Initialise l'interface graphique de la vue des bons de livraison.
+     */
     private void initializeUI() {
         setLayout(new BorderLayout());
 
@@ -43,7 +72,7 @@ public class DeliveryNoteView extends JPanel {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 if (value instanceof Order) {
                     Order order = (Order) value;
-                    // Récupérer le nom du client si tu veux l’afficher
+
                     ClientController clientController = new ClientController();
                     Client client = clientController.getClientById(order.getClientId());
                     String clientName = client != null ? client.getName() : "Inconnu";

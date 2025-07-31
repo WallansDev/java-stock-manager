@@ -1,6 +1,6 @@
-package src.controllers;
+package controllers;
 
-import src.models.*;
+import models.*;
 import java.util.*;
 
 import com.google.gson.Gson;
@@ -16,12 +16,30 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Consumer;
 
+/**
+ * Contrôleur permettant de gérer les factures (Bill) : chargement, sauvegarde,
+ * création, abonnement aux changements et gestion du paiement.
+ */
 public class BillController {
+    /**
+     * Liste des factures en mémoire.
+     */
     private List<Bill> bills = new ArrayList<>();
+    /**
+     * Chemin du fichier JSON de stockage des factures.
+     */
     private final String filename = "data/bills.json";
 
+    /**
+     * Callback appelé lors d'un changement sur la liste des factures.
+     */
     private Consumer<List<Bill>> onBillChange = null;
 
+    /**
+     * Charge la liste des factures depuis le fichier JSON.
+     *
+     * @return Liste des factures chargées
+     */
     public List<Bill> loadBills() {
         Gson gson = new Gson();
         File file = new File(filename);
@@ -41,16 +59,27 @@ public class BillController {
         }
     }
 
+    /**
+     * Permet de s'abonner aux changements de la liste des factures.
+     *
+     * @param con Consommateur appelé lors d'un changement
+     */
     public void subscribeToBillChange(Consumer<List<Bill>> con) {
         this.onBillChange = con;
     }
 
+    /**
+     * Appelle le callback d'abonnement s'il existe.
+     */
     private void callSubscribes() {
         if (this.onBillChange != null) {
             this.onBillChange.accept(bills);
         }
     }
 
+    /**
+     * Sauvegarde toutes les factures dans le fichier JSON et notifie les abonnés.
+     */
     public void saveAllBills() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter(filename)) {
@@ -61,6 +90,14 @@ public class BillController {
         }
     }
 
+    /**
+     * Crée une nouvelle facture pour une commande et un client donnés, ou retourne
+     * la facture existante si elle existe déjà pour cette commande.
+     *
+     * @param order  Commande associée
+     * @param client Client associé
+     * @return Facture créée ou existante
+     */
     public Bill createBill(Order order, Client client) {
 
         // Vérifie si une facture existe déjà pour cette commande
@@ -78,6 +115,11 @@ public class BillController {
         return bill;
     }
 
+    /**
+     * Marque une facture comme payée à partir de son identifiant.
+     *
+     * @param billId Identifiant de la facture à marquer comme payée
+     */
     public void markAsPaid(String billId) {
         for (Bill b : bills) {
             if (b.getBillId().equals(billId)) {
